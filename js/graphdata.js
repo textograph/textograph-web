@@ -27,7 +27,7 @@ var graph_data = {
     auto_inc_id: 0,
     note_auto_id: 0,
     version: 0.1,
-    name: null,
+    name: "untitled",
     id: null,
     url: null,
     clipboard: null,
