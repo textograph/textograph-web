@@ -26,8 +26,8 @@ please refer to this [link](https://github.com/textograph/anki-add-on)
 # Using Web Server for Saving Graph
 there is also a mini webserver developed by laravel framework to serve as an online graph saver. instructions can be found [here](https://github.com/textograph/textograph-server-docker).
 
-#Contribution
+# Contribution
 is welcomed
 
-#Licence
+# Licence
 Copyright Apache version 2.0, Mahdi Saravi 2020
