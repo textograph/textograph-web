@@ -171,7 +171,7 @@ function onSaveAsDialog() {
 function onOpenDialog() {
 
 }
-text_view.onmouseup = gText;
+document.onmouseup = gText;
 if (!document.all) document.captureEvents(Event.MOUSEUP);
 
 
