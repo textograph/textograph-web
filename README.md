@@ -1,5 +1,5 @@
 # Introduction
-[Textograph](https://github.com/textograph/textograph) is a web-base application for creating tree-view diagrams from text (by human, not automatic).
+[Textograph](https://github.com/textograph/textograph) is a web-base application for creating tree-view diagrams from PDF file or any text (by human, not automatic).
 the created graph can be uploaded to your own server or saved as an html file. 
 ![textograph anki](img/image.png?raw=true)
 
@@ -12,10 +12,10 @@ The code for creating graphs came from awesome [D3js](https://github.com/d3/d3) 
   ```
 2. open index.html with your web browser (tested on Fireforx and Chrome). there is an online test version at [here](http://test.textograph.digitaltoxicity.ir/)
 3. enjoy reading the text as well as creating diagram
-  - select Edit button and paste text into dialog and press ok
+  - Open a PDF file using PDF button or select Edit button and paste text into dialog and press ok
   - select a text and create two children nodes (forward arrow)
   - change view and zoom helps to better see the created diagrams
-  - as more node you add to the graph the graph will be better in look and appearance
+  - as you add more nodes to the graph, it looks better
   - selecting auto mode will enhance node creation (it needs learning curve to master using it)
 4. select nodes and export to anki to review them more and more
 5. save to server or disk if you wish
