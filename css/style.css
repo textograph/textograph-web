@@ -48,7 +48,8 @@ text {
     width: 100%;
 }
 
-#text-view {
+#text-view,
+#pdf-viewer {
     width: 100%;
     height: calc(98%);
     overflow-y: scroll;
@@ -57,7 +58,8 @@ text {
     padding: 10px;
 }
 
-#mini-toolbar, #canvas-toolbar {
+#mini-toolbar,
+#canvas-toolbar {
     opacity: 90%;
     top: 0;
     position: absolute;
@@ -68,7 +70,8 @@ text {
     justify-content: space-around;
 }
 
-#mini-toolbar div, #canvas-toolbar div {
+#mini-toolbar div,
+#canvas-toolbar div {
     opacity: 100% !important;
     /*     background: rgb(173, 139, 88); */
     width: auto;
@@ -79,19 +82,23 @@ text {
     font-size: 30 !important;
     cursor: pointer;
 }
+
 #canvas-toolbar {
     height: auto;
 }
-#canvas-toolbar div{
+
+#canvas-toolbar div {
     opacity: .8 !important;
     margin: 10px 5px;
 }
 
-#canvas-toolbar div:hover{
+#canvas-toolbar div:hover {
     opacity: 1 !important;
 }
-#toolbar div {
-    margin: 10px;
+
+#toolbar div,
+#toolbar label {
+    margin: 5px;
 }
 
 #save_area {
@@ -123,7 +130,7 @@ input:focus {
 
 .range-slider {
     -webkit-appearance: none;
-    min-width: 230px;
+    min-width: 100px;
     width: 20%;
     height: 30%;
     max-height: 10px;
@@ -133,6 +140,7 @@ input:focus {
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    flex: 1 0;
 }
 
 .range-slider:hover {
@@ -343,10 +351,11 @@ graph span.edit-name:hover {
 div svg:not(:root).svg-inline--fa {
     font-size: 25px;
 }
-.svg-inline--fa.fa-stack-1x{
+
+.svg-inline--fa.fa-stack-1x {
     width: .5em !important;
-    
 }
+
 .modal-body div.jHtmlArea {
     width: 100% !important;
 }
@@ -365,13 +374,33 @@ div svg:not(:root).svg-inline--fa {
 }
 
 @keyframes blinker {
-    0%{     color: red;    }
-    49%{    color: red; }
-    60%{    color: transparent; }
-    99%{    color:transparent;  }
-    100%{   color: red;    }
+    0% {
+        color: red;
+    }
+    49% {
+        color: red;
+    }
+    60% {
+        color: transparent;
+    }
+    99% {
+        color: transparent;
+    }
+    100% {
+        color: red;
+    }
 }
 
-.green-color{
+.green-color {
     color: green;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+button.print,
+button.download,
+div.toolbarButtonSpacer {
+    display: none !important;
 }

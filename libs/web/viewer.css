@@ -206,11 +206,11 @@
 
 .annotationLayer .textWidgetAnnotation input.comb:focus {
     /*
-   * Letter spacing is placed on the right side of each character. Hence, the
-   * letter spacing of the last character may be placed outside the visible
-   * area, causing horizontal scrolling. We avoid this by extending the width
-   * when the element has focus and revert this when it loses focus.
-   */
+ * Letter spacing is placed on the right side of each character. Hence, the
+ * letter spacing of the last character may be placed outside the visible
+ * area, causing horizontal scrolling. We avoid this by extending the width
+ * when the element has focus and revert this when it loses focus.
+ */
     width: 115%;
 }
 
@@ -628,7 +628,7 @@ html[dir='rtl'] #outerContainer.sidebarOpen #sidebarContainer {
     -webkit-overflow-scrolling: touch;
     position: absolute;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 html[dir='ltr'] #sidebarContent {
@@ -761,7 +761,10 @@ html[dir='rtl'] #toolbarContainer,
 }
 
 #toolbarViewer {
-    height: 32px;
+    min-height: 32px;
+    background-color: rgba(71, 71, 71, 1);
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #loadingBar {
@@ -1004,20 +1007,20 @@ html[dir='ltr'] .doorHangerRight:before {
 }
 
 #toolbarViewerMiddle {
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
+    /*! position: relative; */
+    /*! left: 50%; */
+    /*! -webkit-transform: translateX(-50%); */
+    /*! transform: translateX(-50%); */
 }
 
 html[dir='ltr'] #toolbarViewerLeft,
 html[dir='rtl'] #toolbarViewerRight {
-    float: left;
+    /*! float: left; */
 }
 
 html[dir='ltr'] #toolbarViewerRight,
 html[dir='rtl'] #toolbarViewerLeft {
-    float: right;
+    /*! float: right; */
 }
 
 html[dir='ltr'] #toolbarViewerLeft>*,
@@ -1236,7 +1239,7 @@ html[dir='rtl'] .dropdownToolbarButton {
 }
 
 .dropdownToolbarButton {
-    width: 140px;
+    width: 80px;
     padding: 0;
     overflow: hidden;
 }
@@ -1319,7 +1322,7 @@ html[dir='rtl'] #findNext {
 .toolbarButton::before,
 .secondaryToolbarButton::before {
     /* All matching images have a size of 16x16
-   * All relevant containers have a size of 32x25 */
+ * All relevant containers have a size of 32x25 */
     position: absolute;
     display: inline-block;
     top: 4px;
@@ -1782,7 +1785,7 @@ html[dir='rtl'] .outlineItem>.outlineItems {
     min-width: 95%;
     min-width: calc(100% - 4px);
     /* Subtract the right padding (left, in RTL mode)
-                                  of the container. */
+                                of the container. */
     height: auto;
     margin-bottom: 1px;
     border-radius: 2px;
@@ -1894,8 +1897,8 @@ html[dir='rtl'] .outlineItemToggler::before {
 
 
 /* TODO: file FF bug to support ::-moz-selection:window-inactive
-   so we can override the opaque grey background when the window is inactive;
-   see https://bugzilla.mozilla.org/show_bug.cgi?id=706209 */
+ so we can override the opaque grey background when the window is inactive;
+ see https://bugzilla.mozilla.org/show_bug.cgi?id=706209 */
 
 ::-moz-selection {
     background: rgba(0, 0, 255, 0.3);
