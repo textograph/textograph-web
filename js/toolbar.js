@@ -10,6 +10,22 @@ var curr_selected_text = '';
 var auto_repeat = false
 var repeat_action = null
 arr_cummulated_text = []
+$("#pdf-viewer").hide()
+
+document.getElementById('openPDF').onclick = function(event) {
+    $("#pdf-viewer").toggle()
+    $("#text-view").toggle()
+        // var fileReader = new FileReader();
+        // fileReader.onload = function() {
+
+    //     var typedarray = new Uint8Array(this.result);
+    //     //replaced the old function with the new api
+    //     const loadingTask = PDFViewerApplication.open(typedarray);
+    // }
+    // var pdfFile = event.target.files[0];
+    // fileReader.readAsArrayBuffer(pdfFile);
+}
+
 action_funcs = {
     "child": (d) => { graph_data.addChild(d) },
     "before": (d) => { graph_data.addUncle(d) },
@@ -112,6 +128,8 @@ function ChangeDocText() {
     $("#text-view").html($("#text_area").htmlarea('html'));
     var event = new Event('click');
     document.getElementById("close-edit-dlg").dispatchEvent(event);
+    $("#pdf-viewer").hide()
+    $("#text-view").show()
 }
 
 function gText(e) {
@@ -171,17 +189,16 @@ function onSaveAsDialog() {
 function onOpenDialog() {
 
 }
-text_view.onmouseup = gText;
+document.onmouseup = gText;
 if (!document.all) document.captureEvents(Event.MOUSEUP);
 
 
 // call if textarea has been change
-text_area.onchange = function() {
-    $("#text-view").text(this.value)
-}
-document.addEventListener("mousedown", function() {
-    console.log("click")
-})
+// text_area.onchange = function() {
+//     $("#text-view").text(this.value)
+// }
+// document.addEventListener("mousedown", function() {
+// })
 
 function showCanvasToolbar(node) {
     // this function and next one are public and are called from chart and collapsible_tree objects.
@@ -189,18 +206,16 @@ function showCanvasToolbar(node) {
     // and initialize each object with a context menu function, in this way the encapsulation rule is not violated
     e = d3.event;
     const toolbar = $("#canvas-toolbar");
-    toolbar.css("display", 'block');
+    toolbar.show();
     const Y = e.clientY - (toolbar.height() / 2);
     const X = e.clientX - toolbar.width() - 10;
     toolbar.css("left", `${X}px`);
     toolbar.css("top", `${Y}px`);
-    console.log(e.clientY, e.clientX)
 }
 
 function hideCanvasToolbar(node) {
-    console.log("hiding")
     toolbar = $("#canvas-toolbar");
-    toolbar.css("display", 'none');
+    toolbar.hide();
 }
 
 // if toolbar buttons clicked
@@ -212,7 +227,6 @@ $("#canvas-toolbar").on('click', 'div', function() {
 $("#mini-toolbar").on('click', 'div', function() {
     if (curr_selected_text || auto_repeat) {
         // do action if there is a selection or we are in recording mode
-        console.log(curr_selected_text);
         the_id = $(this).attr("id")
         if (the_id == "auto-repeat" || the_id == repeat_action) { // code block to turn blinking on or off
             auto_repeat = auto_repeat ? false : true;
@@ -252,9 +266,9 @@ $("#mini-toolbar").on('click', 'div', function() {
 
 function hide_minitoolbar() {
     deselectAllTexts();
-    toolbar = $("#mini-toolbar");
-    toolbar.css("display", 'none');
+    $("#mini-toolbar").hide();
 }
+
 $("#mini-toolbar").on('mousedown', 'div', function() {
     if (t) {
         curr_selected_text = t;
@@ -264,8 +278,6 @@ $("#mini-toolbar").on('mousedown', 'div', function() {
 
 
 $("#toolbar").on('click', 'div', function() {
-
-    // console.log($("#save_area").text())
 
     the_id = $(this).attr("id")
     switch (the_id) {
@@ -325,7 +337,7 @@ function getQuiz() {
             show_quiz_leaves.checked = false
             return
         }
-
+        $("#pdf-viewer").hide()
         new_data = graph_data.stratify(active_node); // make new hierarchy from active node
         // copy current graph_data to save its data from being changed
         graph_data = Object.assign({}, graph_data, { nodes: new Map() })
@@ -386,7 +398,6 @@ radiusSlider.oninput = function() {
 
 viewBoxSlider.oninput = function() {
     drawer.changeZoom(this.value);
-    console.log(this.value);
 }
 
 function remove_leaves(hierarchy) {
