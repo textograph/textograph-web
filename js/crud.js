@@ -35,6 +35,7 @@ server = {
         property.collapsibleTree_zoom = chart_tree.zoom
         property.collapsibleTree_radius = chart_tree.radius
         property.notes = graph_data.getNotes()
+        property.references = graph_data.getReferences()
         json.json = graph_data.stratify()
         json.property = property
         json.name = (name) ? name : document.getElementById("save-name").value;
@@ -215,6 +216,7 @@ server = {
         $("#text-view").html(data.property.text)
         graph_data.version = data.property.version
         graph_data.setNotes(data.property.notes)
+        graph_data.setReferences(data.property.references)
         refresh_view();
         return null
     }

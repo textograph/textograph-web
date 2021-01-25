@@ -26,14 +26,36 @@ document.getElementById('openPDF').onclick = function(event) {
     // fileReader.readAsArrayBuffer(pdfFile);
 }
 
+function set_reference() {
+    if ($("#pdf-viewer").is(":visible")) {
+        ref_id = graph_data.addRef(PDFViewerApplication.pdfDocumentProperties.url)
+        graph_data.data["ref_id"] = ref_id
+        graph_data.data["ref_page"] = PDFViewerApplication.pdfDocumentProperties._currentPageNumber
+    } else {
+        graph_data.data["ref_id"] = null
+        graph_data.data["ref_page"] = null
+    }
+}
 action_funcs = {
-    "child": (d) => { graph_data.addChild(d) },
-    "before": (d) => { graph_data.addUncle(d) },
-    "below": (d) => { graph_data.addSibling(d) },
+    "child": (d) => {
+        set_reference();
+        graph_data.addChild(d);
+        graph_data.data["note_id"] = null
+    },
+    "before": (d) => {
+        set_reference();
+        graph_data.addUncle(d);
+        graph_data.data["note_id"] = null
+    },
+    "below": (d) => {
+        set_reference();
+        graph_data.addSibling(d);
+        graph_data.data["note_id"] = null
+    },
     "add-text": (d) => { arr_cummulated_text.push(d); return true; },
     "note": (d) => {
         const note_id = graph_data.addNote(d)
-        graph_data.changeCurrentNote(note_id)
+        graph_data.data["note_id"] = note_id
         return true;
     },
     "delete-node": () => {
@@ -51,6 +73,7 @@ action_funcs = {
         refresh_view()
     },
     "add-note": (d) => {
+        set_reference();
         note_id = graph_data.addNote(d)
         graph_data.current_node.note_id = note_id
     },
@@ -78,6 +101,7 @@ action_funcs = {
                     "fields": {
                         "TestGraph": JSON.stringify(frontjson),
                         "AnswerGraph": "show_quiz_leaves.checked=false;refresh_view();",
+                        // TODO: add references to notes
                         "Notes": JSON.stringify(notes),
                         "Settings": settings
                     },
@@ -86,6 +110,7 @@ action_funcs = {
                         "duplicateScope": "deck"
                     },
                     "tags": [
+                        // TODO: add references to the tag of anki
                         "textograph",
                         graph_data.root_node.name,
                         graph_data.name,
@@ -167,8 +192,8 @@ function showMiniToolbar(e) {
     X = e.clientX - (box.clientWidth / 2);
     toolbar.css("left", `${X}px`);
     regex_selected_text = new RegExp(t, 'i')
-    cur_note = graph_data.getCurrentNote();
-    // blink comment if there is indication
+    cur_note = graph_data.getNote(graph_data.data["note_id"])
+        // blink comment if there is indication
     if (!cur_note || cur_note.search(regex_selected_text) < 0)
         set_clss("note", "blink")
     else
@@ -417,4 +442,15 @@ function remove_leaves(hierarchy) {
             d.children = new_children;
         }
     });
+}
+
+function hash_str(str) {
+    var hash = 0;
+    if (str.length == 0) return hash;
+    for (i = 0; i < str.length; i++) {
+        char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
 }

@@ -131,7 +131,9 @@ var radial_tree = {
                 if (the_note) {
                     node_name = d.data.name
                     var res = the_note.replace(new RegExp(`(${node_name})`), '<span id="name_word"><b>$1</b></span>');
-                    return res;
+                    ref = getNodeRef(d).replace(new RegExp(`.pdf$`), "")
+                    ref = ref ? `(${ref}:${d.data.ref_page})` : ""
+                    return `${res}${ref}`;
                 }
             });
         svg.call(tip);

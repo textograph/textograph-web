@@ -17,12 +17,21 @@ function getNodeNote(d) {
     } else
         return null
 }
+
+function getNodeRef(d) {
+    if (d != null) {
+        const node = d.data
+        return graph_data.references[node.ref_id];
+    }
+}
+
 var graph_data = {
     nodes: new Map(),
     notes: {},
+    references: {},
+    data: {}, // adjunctive data like note id, reference id and so on, used by add_to_child function
     current_node: null,
     root_node: null,
-    current_note: null,
     current_depth: 0,
     auto_inc_id: 0,
     note_auto_id: 0,
@@ -66,21 +75,17 @@ var graph_data = {
         this.nodes.delete(parent.id)
     },
 
-    addChildTo(node, parent = null, data = null) {
+    addChildTo(node, parent = null) {
         // adds new node to nodes repo, increases autonumber, 
         //  and makes currnt_node pointer to point to the newly created node
 
-        if (data == null) {
-            data = { note_id: this.current_note }
-            this.current_note = null
-        }
         if (typeof node === "string") {
 
             if (this.nodes.size == 0 || // there is no other node (creating root node)
                 this.nodes.has(parent.id) // or check if parent is present
             ) {
                 new_node = new GraphNode(this.auto_inc_id, node, parent)
-                new_node = Object.assign(new_node, data) // add additional data to new node
+                new_node = Object.assign(new_node, this.data) // add additional data to new node
                 this.nodes.set(this.auto_inc_id++, new_node) // add new node to our node repo
                 this.current_node = new_node;
                 return new_node;
@@ -135,12 +140,6 @@ var graph_data = {
         this.notes[this.note_auto_id] = txt_note
         return this.note_auto_id++
     },
-    changeCurrentNote(note_id) {
-        this.current_note = note_id
-    },
-    getCurrentNote() {
-        return this.notes[this.current_note]
-    },
     getNote(id) {
         return this.notes[id]
     },
@@ -153,6 +152,20 @@ var graph_data = {
         for (let key in this.notes)
             if (max < +key) max = +key
         this.note_auto_id = max + 1
+    },
+    addRef(ref_name) {
+        const ref_id = hash_str(ref_name);
+        this.references[ref_id] = ref_name;
+        return ref_id;
+    },
+    getRef(ref_id) {
+        return this.references[ref_id]
+    },
+    getReferences() {
+        return this.references
+    },
+    setReferences(references) {
+        this.references = references
     },
     stratify(parent = null, copy_id = true) {
         nodes = [...this.nodes.values()]
@@ -207,11 +220,12 @@ var graph_data = {
 
 
 function stratify(parent, nodes, copy_id = true) {
-    const new_node = {
-        name: parent.name,
-        note_id: parent.note_id,
-        children: new Array()
-    }
+    // all the data will be copied except parent
+    const new_node = Object.assign({}, parent, {
+        children: []
+    })
+    delete new_node.parent
+
     if (copy_id) new_node.id = parent.id
     nodes.forEach((node, index) => {
         if (node.parent == parent) {
@@ -226,12 +240,13 @@ function stratify(parent, nodes, copy_id = true) {
 
 function destratify(node, parent = null, base_id = null) {
     let child_arr = []
-    let cur_obj = {
+        // all the data will be copied except children array
+    let cur_obj = Object.assign({}, node, {
         id: base_id ? base_id++ : node.id,
-        name: node.name,
-        parent: parent,
-        note_id: node.note_id
-    }
+        parent,
+        children: null
+    })
+    delete cur_obj.children
     node.children.forEach(child => {
         this_node_childs = destratify(child, cur_obj, base_id)
         if (base_id != null) {
