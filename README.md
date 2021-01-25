@@ -3,6 +3,13 @@
 the created graph can be uploaded to your own server or saved as an html file. 
 ![textograph anki](img/image.png?raw=true)
 
+# Features
+* Creating tree graph from text
+* Supports both plain text and PDF as input source
+* Export graphs to anki flash card program
+* Save Graphs to remote server
+* Add pdf references to nodes **(new)**
+
 # Dependencies
 The code for creating graphs came from awesome [D3js](https://github.com/d3/d3) library and [radial tree](https://observablehq.com/@d3/radial-tidy-tree) and [collapsible tree](https://observablehq.com/@d3/collapsible-tree) implementations.
 # How to use
@@ -22,6 +29,7 @@ The code for creating graphs came from awesome [D3js](https://github.com/d3/d3) 
 
 # How to inrteract with anki
 please refer to this [link](https://github.com/textograph/anki-add-on)
+
 
 # Using Web Server for Saving Graph
 there is also a mini webserver developed by laravel framework to serve as an online graph saver. instructions can be found [here](https://github.com/textograph/textograph-server-docker).
