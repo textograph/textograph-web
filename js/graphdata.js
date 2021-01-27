@@ -21,7 +21,10 @@ function getNodeNote(d) {
 function getNodeRef(d) {
     if (d != null) {
         const node = d.data
-        return graph_data.references[node.ref_id];
+        if (node.ref_id != null)
+            return graph_data.references[node.ref_id];
+        else
+            return ""
     }
 }
 
