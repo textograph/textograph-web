@@ -1,0 +1,108 @@
+b958031 change readme
+e853754 Merge branch 'master' of https://github.com/textograph/textograph
+8aa98e4 Merge branch 'pdf_support'
+835d1f1 pdf suppport done
+940e86b format css file
+537b29a add pdf.js
+c55e24c Update README.md
+7affb98 Create README.md
+db42d45 edit image
+8c403fe add image
+b31b24c fix anki sync problem
+ec556af add delete key
+53c91fe fix save bug
+c029048 change default radius for anki export
+249ece3 correct perpage retrieval parameter
+b4d6581 add related tag for anki
+71916f6 fix collapsible tree note taking bug
+75b80e1 fix note save problem
+693453d fix add note
+f14fd4c change ajax to get
+328f27b add basic authentication
+0bea958 Merge branch 'add_to_anki_test1'
+de1f815 add to anki
+a99c3a5 ajax created
+f5e1f85 ajax version
+a3a3f1d initial anki support
+06d232c hilight selected node
+45ad47f not persistent auto child creation
+bc78676 edit node added
+f7b0152 add note to selected node
+e7ef5c6 remove transition when redrawing
+d94a854 Merge branch 'canvas_menu_test'
+a97ebfd contextmenu for collapsible tree
+94088f3 fix destratify bug
+e667b5f copy,cut,paste,del added
+4024689 add delete feature
+e0d7395 contxt menu creation
+d3bf5c4 initial test 1
+2f65678 fix save_as
+cc13284 fix update server request
+4b8c165 fix add node to collapsed node in quize mode
+e5249ea add cumulitative text feature
+551e2b4 added repeated command ability
+cdcf01b blink comment icon
+c4706f2 Merge branch 'add_server_communication'
+7f4fad3 add search
+abd9c8c add save and save as
+9359050 fix some styling problems
+22f64ee fix jHtmlArea mini file
+b080d9e fix- add jHtmlArea files
+b5e0724 Merge branch 'add_server_communication'
+d469b95 add delete
+42eae5c save notes on server finished
+96f2ee8 some styel changes
+9a4fa2e fix note refactoring
+33b722f some style changes
+490277b refactor note handling
+b78438c add some styles changes
+8c8ad33 add wyswyg editor
+66e648d Merge branch 'master' of https://github.com/textograph/textograph
+af7ed2d Merge branch 'add_server_communication'
+ac48d5c save text_box finished
+593f3eb fix mini-toolbar position
+886b90a save zoom position
+5ef2e7c update index.html file
+46ff2bb open graph working
+bd0f41e Delete CNAME
+87e006c Create CNAME
+463d50a Merge branch 'add_server_communication'
+05be08f open graph initial
+bf44780 search by graph name added
+102ef16 use object in make_url
+1461f1a add timed ajax, some refactoring
+997a59d added awsome fonts
+149e492 fix for server bug
+95fed75 some semi-uml
+fb9914b initial server communication
+9c4b4ac add semi uml
+dc93132 Merge branch 'add_quiz'
+4938ac2 add quiz completed
+67537aa quiz failrly completed
+5bbd240 quiz first implementation
+1118d46 Refactoring Stratify Function
+324e62e add tip and node selection to collapsible tree
+49ca580 Merge branch 'add_tip_and_note'
+1e0c201 rewrite wrap text
+ae18e94 hilight note tooltip
+04dffe8 tip and note added
+54b7e1e separete zooming between tabs
+29e610d add dependency file
+3de3689 Set theme jekyll-theme-minimal
+728e5b3 Create LICENSE
+30339f2 Merge branch 'add zoom and pan behaviors'
+498dbc4 zoom and pan completed
+96bb6e0 zooming completed
+c910014 first zooming implementation
+08c22e9 add tree layout, fix auto_inc counter
+cbd0159 put tree function in chart function
+41962b6 add json destratification
+ef30991 tree_layout_initial
+3adbae0 change stratify function
+8ed4bba create standard json from data
+ad53d8f wrap svg texts
+204687a first stable link toolbar to adding nodes
+4268877 more node in test
+e3817fe change parent to parent_id
+619a78e first graph implementation
+f54ed98 initial commit

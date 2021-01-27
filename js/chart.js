@@ -120,7 +120,7 @@ var radial_tree = {
                 showCanvasToolbar(this)
             })
             .clone(true).lower()
-            .attr("stroke", "white")
+            .attr("stroke", d => d.data.note_id ? d3.rgb(150, 200, 140) : "white")
             .attr("id", d => "")
         this.curr_selection = d3.select(`#node_${this.selected_node_id}`)
 
