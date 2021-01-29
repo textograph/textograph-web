@@ -76,6 +76,8 @@ action_funcs = {
         set_reference();
         note_id = graph_data.addNote(d)
         graph_data.current_node.note_id = note_id
+        graph_data.current_node.ref_id = graph_data.data["ref_id"]
+        graph_data.current_node.ref_page = graph_data.data["ref_page"]
     },
     "edit-node": () => {
         const node_name = prompt("enter new name for this node", graph_data.current_node.name)
