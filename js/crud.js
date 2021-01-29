@@ -216,7 +216,9 @@ server = {
         $("#text-view").html(data.property.text)
         graph_data.version = data.property.version
         graph_data.setNotes(data.property.notes)
-        graph_data.setReferences(data.property.references)
+        if (data.property.references)
+        //for backward compatibility, there may be not a reference field
+            graph_data.setReferences(data.property.references)
         refresh_view();
         return null
     }
