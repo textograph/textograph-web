@@ -44,6 +44,26 @@ function updateClipboard(newClip) {
         /* clipboard write failed */
         console.log("Error: Copy to clipboard not allowed")
     });
+
+    if (typeof(navigator.clipboard) == 'undefined') {
+        var textArea = document.createElement("textarea");
+        textArea.value = newClip;
+        textArea.style.position = "fixed"; //avoid scrolling to bottom
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            toastr.info(msg);
+        } catch (err) {
+            toastr.warning('Was not possible to copy te text: ', err);
+        }
+
+        document.body.removeChild(textArea)
+        return;
+    }
 }
 
 
