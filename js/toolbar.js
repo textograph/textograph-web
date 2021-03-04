@@ -38,12 +38,6 @@ function set_reference() {
 }
 
 function updateClipboard(newClip) {
-    navigator.clipboard.writeText(newClip).then(function() {
-        /* clipboard successfully set */
-    }, function() {
-        /* clipboard write failed */
-        console.log("Error: Copy to clipboard not allowed")
-    });
 
     if (typeof(navigator.clipboard) == 'undefined') {
         var textArea = document.createElement("textarea");
@@ -64,6 +58,12 @@ function updateClipboard(newClip) {
         document.body.removeChild(textArea)
         return;
     }
+    navigator.clipboard.writeText(newClip).then(function() {
+        /* clipboard successfully set */
+    }, function() {
+        /* clipboard write failed */
+        console.log("Error: Copy to clipboard not allowed")
+    });
 }
 
 
