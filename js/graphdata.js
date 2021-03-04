@@ -50,6 +50,7 @@ var graph_data = {
     },
     copyCurrentNode() {
         this.clipboard = this.stratify(this.current_node, false)
+        return this.getOutline(this.current_node, false)
     },
     pasteIntoCurrentNode() {
         _nodes = new Map()
@@ -178,6 +179,15 @@ var graph_data = {
         }
         return stratify(parent, nodes, copy_id) //parent is null so it returns all hierarchy including root
     },
+    getOutline(parent = null) {
+        nodes = [...this.nodes.values()]
+        if (parent == null) {
+            root_id = Math.min(...this.nodes.keys())
+            parent = this.nodes.get(root_id)
+        }
+        return make_outline(parent, nodes, 0)
+    },
+
     setData(json_graph) {
         let _nodes = new Map()
         try {
@@ -239,6 +249,16 @@ function stratify(parent, nodes, copy_id = true) {
     return new_node
 }
 
+function make_outline(parent, nodes, number_of_tabs) {
+    outline_str = ""
+    nodes.forEach((node, index) => {
+        if (node.parent == parent) {
+            delete nodes[index]
+            outline_str = outline_str + "\t".repeat(number_of_tabs) + node.name + "\n" + make_outline(node, nodes, number_of_tabs + 1)
+        }
+    })
+    return outline_str
+}
 
 
 function destratify(node, parent = null, base_id = null) {

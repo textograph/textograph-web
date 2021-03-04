@@ -36,6 +36,17 @@ function set_reference() {
         graph_data.data["ref_page"] = null
     }
 }
+
+function updateClipboard(newClip) {
+    navigator.clipboard.writeText(newClip).then(function() {
+        /* clipboard successfully set */
+    }, function() {
+        /* clipboard write failed */
+        console.log("Error: Copy to clipboard not allowed")
+    });
+}
+
+
 action_funcs = {
     "child": (d) => {
         set_reference();
@@ -62,14 +73,18 @@ action_funcs = {
         graph_data.deleteCurrentNode()
         refresh_view()
     },
-    "copy-node": () => graph_data.copyCurrentNode(),
+    "copy-node": () => {
+        outline_txt = graph_data.copyCurrentNode()
+        updateClipboard(outline_txt)
+    },
     "paste-node": () => {
         graph_data.pasteIntoCurrentNode();
         refresh_view();
     },
     "cut-node": () => {
-        graph_data.copyCurrentNode();
+        outline_txt = graph_data.copyCurrentNode();
         graph_data.deleteCurrentNode();
+        updateClipboard(outline_txt)
         refresh_view()
     },
     "add-note": (d) => {
